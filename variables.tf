@@ -1,15 +1,17 @@
-variable "aws_region" {
-  description = "AWS region for all resources."
+locals {
+  function = {
+    catch-all        = "$default"
+    hello-world      = "GET /hello-world"
+    home             = "GET /api/home"
+    index            = "GET /"
+    question         = "POST /api/question"
+    questions        = "GET /api/questions"
+    questions_delete = "DELETE /api/question"
+  }
+  bucket_name = replace(terraform.workspace, "_", "-")
+}
 
+variable "aws_region" {
   type    = string
   default = "us-west-1"
-}
-
-variable "domain" {
-  type    = string
-  default = "yourdomainname.com"
-}
-
-variable "log_retention_days" {
-  default = 3
 }
